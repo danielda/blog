@@ -1,0 +1,34 @@
+<h1>Mini facebook</h1>
+
+<%= form_for :post, url: posts_path do |f| %>
+  <p>
+    <%= f.text_area :text, :value => "What's on your mind?" %>
+  </p>
+ 
+  <p>
+    <%= f.submit "Add"%>
+  </p>
+<% end %>
+</br>
+  <% @posts.each do |post| %>
+
+      <%= post.text %>
+
+	<% @post.find(post.id).comments.each do |comment| %>
+ 
+ 	 <p>
+    		<strong>Comment:</strong>
+   		 <%= comment.body %>
+ 	 </p>
+	<% end %>
+	<%= form_for([@post.find(post.id), @post.find(post.id).comments.build]) do |f| %>
+  	<p>
+   		 <%= f.text_area :body , :value => "Enter comment here" %>
+	</p>
+	<p>
+    		<%= f.submit "Add"%>
+	</p>
+	<% end %>
+  <% end %>
+
+
